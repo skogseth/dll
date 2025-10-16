@@ -4,5 +4,5 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-libc = "0.2.177"
-thiserror = "2.0.17"
+libc = "0.2"
+thiserror = "1.0"
