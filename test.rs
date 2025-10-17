@@ -1,38 +1,28 @@
-use libtest2::{Harness, RunResult, Trial};
+use libtest2::_private::{Case, DistributedList, DynCase};
+use libtest2::{RunResult, TestContext};
 
-fn main() -> Result<(), std::io::Error> {
-    let tests = vec![
-        Trial::test("random_test", |_ctx| -> RunResult {
-            random_test();
-            Ok(())
-        }),
-        Trial::test("test_number_2", |_ctx| -> RunResult {
-            test_number_2();
-            Ok(())
-        }),
-        Trial::test("failing_test", |_ctx| -> RunResult {
-            failing_test();
-            Ok(())
-        }),
-    ];
+static TESTS: DistributedList<DynCase> = DistributedList::root();
 
-    Harness::new()
-        .with_env()
-        .unwrap()
-        .parse()
-        .unwrap()
-        .discover(tests)
-        .unwrap()
-        .run()
-        .map(|_success| ())
+fn main() {
+    for (i, test) in TESTS.iter().enumerate() {
+        println!("[{i}] {n}", n = test.name());
+    }
+
+    libtest2::main(TESTS.iter().copied());
 }
 
-fn random_test() {
+#[libtest2::test]
+fn random_test(_context: &TestContext) -> RunResult {
     assert_eq!(1 + 1, 2);
+    Ok(())
 }
 
-fn test_number_2() {}
+#[libtest2::test]
+fn test_number_2(_context: &TestContext) -> RunResult {
+    Ok(())
+}
 
-fn failing_test() {
+#[libtest2::test]
+fn failing_test(_context: &TestContext) -> RunResult {
     panic!("shit we failed boys");
 }
