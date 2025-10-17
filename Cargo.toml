@@ -3,6 +3,15 @@ name = "dll"
 version = "0.1.0"
 edition = "2024"
 
+[[test]]
+name = "integration_tests"
+path = "test.rs"
+harness = false
+
 [dependencies]
 libc = "0.2"
 thiserror = "1.0"
+
+[dev-dependencies]
+libtest2 = "0.0.3"
+
