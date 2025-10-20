@@ -1,23 +1,41 @@
-use libtest2::_private::{Case, DistributedList, DynCase};
-use libtest2::{RunResult, TestContext};
+use libtest2::_private::{DistributedList, TestDef};
+use libtest2::{FnCase, RunResult, TestContext};
 
-static TESTS: DistributedList<DynCase> = DistributedList::root();
-static DIFFERENT_TESTS: DistributedList<DynCase> = DistributedList::root();
+static TESTS: DistributedList<TestDef> = DistributedList::root();
+static FIXTURE_TESTS: DistributedList<TestDef<fn(i32)>> = DistributedList::root();
 
 fn main() {
-    let mut all_tests = Vec::new();
+    let basic_tests = TESTS
+        .iter()
+        .copied()
+        .map(|test| FnCase::test(test.name, test.function));
 
-    for (i, test) in TESTS.iter().copied().enumerate() {
-        eprintln!("[{i}] {n}", n = test.name());
-        all_tests.push(test);
-    }
+    // Do some fake setup for the "fixture" tests
+    let i = 30;
 
-    for (i, test) in DIFFERENT_TESTS.iter().copied().enumerate() {
-        eprintln!("<<different>> [{i}] {n}", n = test.name());
-        all_tests.push(test);
-    }
+    let fixture_tests = FIXTURE_TESTS.iter().copied().map(|test| {
+        FnCase::test(test.name, move |_ctx: &TestContext| -> RunResult {
+            (test.function)(i);
+            Ok(())
+        })
+    });
 
+    let all_tests = basic_tests.chain(fixture_tests);
     libtest2::main(all_tests);
+}
+
+libtest2::_test_parse! {
+    #[test(FIXTURE_TESTS, fn(i32))]
+    fn fixture_test_1(i: i32) {
+        assert!(i > 0);
+    }
+}
+
+libtest2::_test_parse! {
+    #[test(FIXTURE_TESTS, fn(i32))]
+    fn fixture_test_2(i: i32) {
+        assert!(i == 1);
+    }
 }
 
 libtest2::_test_parse! {
@@ -39,12 +57,5 @@ libtest2::_test_parse! {
     #[test]
     fn failing_test(_context: &TestContext) -> RunResult {
         panic!("shit we failed boys");
-    }
-}
-
-libtest2::_test_parse! {
-    #[test(DIFFERENT_TESTS)]
-    fn not_like_the_other_tests(_context: &TestContext) -> RunResult {
-        panic!("I'm special!");
     }
 }
