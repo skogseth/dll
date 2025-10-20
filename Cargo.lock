@@ -67,7 +67,6 @@ checksum = "59c9b8bdf64ee849747c1b12eb861d21aa47fa161564f48332f1afe2373bf899"
 [[package]]
 name = "distributed-list"
 version = "0.0.2"
-source = "git+https://github.com/assert-rs/libtest2#ae906fd4b9f298a8bae6e9a66e42dd78c7824e3e"
 dependencies = [
  "ctor",
 ]
@@ -90,12 +89,10 @@ checksum = "7943c866cc5cd64cbc25b2e01621d07fa8eb2a1a23160ee81ce38704e97b8ecf"
 [[package]]
 name = "json-write"
 version = "0.0.2"
-source = "git+https://github.com/assert-rs/libtest2#ae906fd4b9f298a8bae6e9a66e42dd78c7824e3e"
 
 [[package]]
 name = "lexarg"
 version = "0.0.2"
-source = "git+https://github.com/assert-rs/libtest2#ae906fd4b9f298a8bae6e9a66e42dd78c7824e3e"
 dependencies = [
  "lexarg-error",
  "lexarg-parser",
@@ -104,7 +101,6 @@ dependencies = [
 [[package]]
 name = "lexarg-error"
 version = "0.0.2"
-source = "git+https://github.com/assert-rs/libtest2#ae906fd4b9f298a8bae6e9a66e42dd78c7824e3e"
 dependencies = [
  "lexarg-parser",
 ]
@@ -112,7 +108,6 @@ dependencies = [
 [[package]]
 name = "lexarg-parser"
 version = "0.0.2"
-source = "git+https://github.com/assert-rs/libtest2#ae906fd4b9f298a8bae6e9a66e42dd78c7824e3e"
 
 [[package]]
 name = "libc"
@@ -123,7 +118,6 @@ checksum = "2874a2af47a2325c2001a6e6fad9b16a53b802102b528163885171cf92b15976"
 [[package]]
 name = "libtest-json"
 version = "0.0.2"
-source = "git+https://github.com/assert-rs/libtest2#ae906fd4b9f298a8bae6e9a66e42dd78c7824e3e"
 dependencies = [
  "json-write",
 ]
@@ -131,7 +125,6 @@ dependencies = [
 [[package]]
 name = "libtest-lexarg"
 version = "0.0.3"
-source = "git+https://github.com/assert-rs/libtest2#ae906fd4b9f298a8bae6e9a66e42dd78c7824e3e"
 dependencies = [
  "lexarg",
  "lexarg-error",
@@ -140,7 +133,6 @@ dependencies = [
 [[package]]
 name = "libtest2"
 version = "0.0.3"
-source = "git+https://github.com/assert-rs/libtest2#ae906fd4b9f298a8bae6e9a66e42dd78c7824e3e"
 dependencies = [
  "distributed-list",
  "libtest2-harness",
@@ -150,7 +142,6 @@ dependencies = [
 [[package]]
 name = "libtest2-harness"
 version = "0.0.3"
-source = "git+https://github.com/assert-rs/libtest2#ae906fd4b9f298a8bae6e9a66e42dd78c7824e3e"
 dependencies = [
  "anstream",
  "anstyle",
@@ -163,7 +154,6 @@ dependencies = [
 [[package]]
 name = "libtest2-proc-macro"
 version = "0.0.3"
-source = "git+https://github.com/assert-rs/libtest2#ae906fd4b9f298a8bae6e9a66e42dd78c7824e3e"
 
 [[package]]
 name = "once_cell_polyfill"
