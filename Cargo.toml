@@ -3,6 +3,14 @@ name = "dll"
 version = "0.1.0"
 edition = "2024"
 
+[[test]]
+name = "test"
+path = "test.rs"
+harness = false
+
 [dependencies]
 libc = "0.2"
 thiserror = "2.0"
+
+[dev-dependencies]
+libtest2 = { path = "../libtest2/crates/libtest2" }
